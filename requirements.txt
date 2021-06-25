@@ -5,5 +5,3 @@ python-dotenv
 altair
 bokeh
 requests
-numpy
-time
