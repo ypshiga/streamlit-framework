@@ -13,19 +13,18 @@ import streamlit as st
 import time
 from datetime import datetime
 import os
+import plotly.express as px
 
 st.title('12 day Milestone Ticker app')
 st.write('Stock data test: IBM')
 
 key = os.environ['key']
-#key = 'IRC9K9I0TMTQZPK7'
-ticker_symbol = 'IBM'
 
 
 # In[ ]:
 
 
-@st.cache
+@st.cache(suppress_st_warning=True) 
 def request_stock_price_hist(symbol, token, sample = False):
     if sample == False:
         q_string = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol={}&outputsize=full&apikey={}'
@@ -62,8 +61,21 @@ def request_stock_price_hist(symbol, token, sample = False):
 # In[ ]:
 
 
+# add user input
+ticker_symbol = st.text_input("Pick a stock ticker label (e.g., IBM):")
+year_select = st.selectbox(
+    'Pick a year:',
+     list(range(2010,2021)))
+month_select = st.selectbox(
+    'Pick a month:',
+     list(range(1,13)))
+
+
+# In[ ]:
+
+
 'Here we go...'
-df = request_stock_price_hist('IBM', key)
+df = request_stock_price_hist(ticker_symbol', key)
 '...all done!'
 
 
@@ -71,24 +83,13 @@ df = request_stock_price_hist('IBM', key)
 
 
 # convert date to year and month variables
-
-
-# In[ ]:
-
-
-# add user input
-year = 2020
-month = 'June'
-
-
-# In[ ]:
-
-
 #date_time_obj = datetime.strptime(df['date'], '%d/%m/%y %H:%M:%S')
 
 
 # In[ ]:
 
 
-st.line_chart(df[['close', 'date']].loc[:365])
+# plots 
+fig = px.line(df, x="date", y="close",hover_name="date",render_mode="svg")
+fig.show()
 
