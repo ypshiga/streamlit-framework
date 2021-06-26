@@ -3,4 +3,3 @@ streamlit
 python-dotenv
 requests
 boto
-os
