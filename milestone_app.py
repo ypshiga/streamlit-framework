@@ -12,13 +12,12 @@ import numpy as np
 import streamlit as st
 import time
 from datetime import datetime
-from boto.s3.connection import S3Connection
 import os
 
 st.title('12 day Milestone Ticker app')
 st.write('Stock data test: IBM')
 
-key = S3Connection(os.environ['key'])
+key = os.environ['key']
 #key = 'IRC9K9I0TMTQZPK7'
 ticker_symbol = 'IBM'
 
@@ -26,6 +25,7 @@ ticker_symbol = 'IBM'
 # In[ ]:
 
 
+@st.cache
 def request_stock_price_hist(symbol, token, sample = False):
     if sample == False:
         q_string = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol={}&outputsize=full&apikey={}'
@@ -63,7 +63,6 @@ def request_stock_price_hist(symbol, token, sample = False):
 
 
 'Here we go...'
-
 df = request_stock_price_hist('IBM', key)
 '...all done!'
 
@@ -71,6 +70,13 @@ df = request_stock_price_hist('IBM', key)
 # In[ ]:
 
 
+# convert date to year and month variables
+
+
+# In[ ]:
+
+
+# add user input
 year = 2020
 month = 'June'
 
