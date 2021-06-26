@@ -12,10 +12,12 @@ import numpy as np
 import streamlit as st
 import time
 from datetime import datetime
+from boto.s3.connection import S3Connection
 
 st.title('12 day Milestone Ticker app')
 st.write('Stock data test: IBM')
 
+key = S3Connection(os.environ['key'])
 #key = 'IRC9K9I0TMTQZPK7'
 ticker_symbol = 'IBM'
 
