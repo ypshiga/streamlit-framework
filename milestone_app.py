@@ -13,6 +13,7 @@ import streamlit as st
 import time
 from datetime import datetime
 from boto.s3.connection import S3Connection
+import os
 
 st.title('12 day Milestone Ticker app')
 st.write('Stock data test: IBM')
