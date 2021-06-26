@@ -11,11 +11,12 @@ import pandas as pd
 import numpy as np
 import streamlit as st
 import time
+from datetime import datetime
 
 st.title('12 day Milestone Ticker app')
 st.write('Stock data test: IBM')
 
-key = 'IRC9K9I0TMTQZPK7'
+#key = 'IRC9K9I0TMTQZPK7'
 ticker_symbol = 'IBM'
 
 
@@ -48,6 +49,8 @@ def request_stock_price_hist(symbol, token, sample = False):
         i_tick+=1
         if i_tick%500==0:
             time.sleep(0.1)
+        if i[0:4]=='2009': # only load data from 2010 onward
+            break
     df.columns = ["open", "high", "low", "close", "adjusted close", "volume", "dividend amount", "split cf"]
     df['date'] = date
     return df
@@ -65,11 +68,18 @@ df = request_stock_price_hist('IBM', key)
 # In[ ]:
 
 
-st.write(df)
+year = 2020
+month = 'June'
 
 
 # In[ ]:
 
 
+#date_time_obj = datetime.strptime(df['date'], '%d/%m/%y %H:%M:%S')
 
+
+# In[ ]:
+
+
+st.line_chart(df[['close', 'date']].loc[:365])
 
