@@ -1,4 +1,6 @@
 # Streamlit on Heroku
+# Edit: I used this repo to build by Milestone project for the TDI 12-day 
+My example [here](https://milestone-12day-app.herokuapp.com/)
 
 This project is intended to help you tie together some important concepts and
 technologies from the 12-day course, including Git, Streamlit, JSON, Pandas,
